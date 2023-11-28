@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <script src="JS/script.js" defer></script>
+    <title>Web Post-It</title>
+</head>
+<body>
+
+    <div class="modal">
+        <div class="modalContent">
+            <button class="bi bi-x" id="close"></button>
+            <form class="taskForm">
+                
+                <h2>Adicionar nova tarefa</h2>
+
+                <div class="formControl">
+                    <label for="toDoTitle">Título da tarefa</label>
+                    <input type="text" name="toDoTitle" id="toDoTitle" placeholder="Título da tarefa">
+                </div>
+                <div class="formControl">
+                    <label for="toDoDesc">Descrição da Tarefa</label>
+                    <textarea name="toDoDesc" id="toDoDesc" placeholder="Descrição da tarefa"></textarea>
+                </div>
+                <button id="send">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <header>
+        <h1>Web Post-It</h1>
+    </header>
+    
+    <main>
+       <h2>Minhas Tarefas</h2> 
+
+       <div class="tasksArea">
+            <button class="bi bi-plus-lg openModal"></button>
+       </div>
+    </main>
+
+
+
+</body>
+</html>

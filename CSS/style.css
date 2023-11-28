@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    
+}
+
+body{
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+   font-family: 'Poppins', sans-serif; 
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: rgb(62, 62, 62);
+    background-color: #facc15;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.281);
+}
+
+.tasksArea{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.postIt{
+    position: relative;
+    background-color: #fde047;
+    width: 220px;
+    height: 220px;
+    padding: 20px;
+    font-family: 'Courgette', cursive;
+}
+
+.buttons{
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.buttons button{
+    border: none;
+    background-color: transparent;
+    font-size: 1.2em;
+}
+
+.buttons button:hover{
+    background-color: #f9f9f97b;
+    cursor: pointer;
+}
+
+.postIt p{
+    color: #525252;
+}
+
+.openModal{
+    border: none;
+    background-color: #fde047;
+    width: 220px;
+    height: 220px;
+    padding: 20px;
+    font-size: 4em;
+    cursor: pointer;
+}
+
+.modal{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100dvh;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.471);
+    display: none;
+}
+
+
+.modalContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    background-color: #fde047;
+    padding: 20px;
+    gap: 10px;
+}
+
+.formControl{
+    display: flex;
+    flex-direction: column;
+}
+
+.formControl label{
+    font-size: 1.3em;
+}
+
+.formControl input, .formControl textarea{
+    font-size: 1.3em;
+    padding: 5px;
+}
+
+.modalContent button{
+    border: none;
+    font-size: 1.3em;
+    padding: 5px;
+}
+
+#close{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #ffffff;
+    font-size: 3em;
+    background-color: transparent;
+}
+
+.taskReady {
+    background-color: rgb(131, 251, 131) !important;
+}

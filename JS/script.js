@@ -1,55 +1,64 @@
 const modal = document.querySelector('.modal');
-const closeModal = document.querySelector('#close');
-const openModal = document.querySelector('.openModal');
-const taskForm = document.querySelector('.taskForm');
-const tasksArea = document.querySelector('.tasksArea');
+const closeModalBtn = document.querySelector('#closeModalBtn');
+const openModalBtn = document.querySelector('#openModalBtn');
+const form = document.querySelector('form');
+const taskArea = document.querySelector('.taskArea');
 
- let taskCount = 0
+let counter = 0
 
-const modalOpen = () => {
-    modal.style.display = 'block'
+const tarefas = [];
+
+const openModal = () => {
+    modal.classList.remove('closed');
 }
 
-const modalClose = () => {
-    modal.style.display = 'none'
+const closeModal = () => {
+    modal.classList.add('closed');
 }
 
-const createTask = (e) => {
+const deleteTask = (id) => {
+    const task = document.getElementById(id);
+    task.remove();
+}
+
+const setCheck = (id) => {
+    const task = document.getElementById(id);
+    task.classList.add('done');
+}
+
+const createNewTask = (e) => {
     e.preventDefault();
-    
 
     if (e.target[0].value === '' || e.target[1].value === '') {
-        alert('Por favor preencha os campo corretemente')
+       alert('por favor, preencha os campos corretamente!');
     } else {
-        openModal.remove()
-        ++taskCount
-        tasksArea.innerHTML += `<div class="postIt" id=${taskCount}>
+        ++counter
+        const task = `<li id="${counter}" class="task">
+        <h3>${e.target[0].value}</h3>
+        <p>${e.target[1].value}
+        </p>
         <div class="buttons">
-            <button class="bi bi-check-circle" onclick="checkTask(${taskCount})"></button>
-            <button class="bi bi-eraser-fill" onclick="removeTask(${taskCount})"></button>
+            <button class="mdi mdi-check" id="doneBtn" onclick="setCheck(${counter})"></button>
+            <button class="mdi mdi-trash-can" id="deleteBtn" onclick="deleteTask(${counter})"></button>
         </div>
+    </li>`
+    
+        taskArea.innerHTML += task;
         
-        <h2>${e.target[0].value}</h2>
-        <p>${e.target[1].value}</p>
-    </div>`
-        modalClose()
-        e.target[0].value = ''
-        e.target[1].value = ''
-        tasksArea.appendChild(openModal)
+        e.target[0].value = '';
+        e.target[1].value = '';
+        closeModal();
     }
 }
 
-const removeTask = (e) => {
-    var task = document.getElementById(e)
-    task.remove()
-}
 
-const checkTask = (e) => {
-    var task = document.getElementById(e)
-    task.classList.toggle('taskReady')
-}
+form.addEventListener("submit", createNewTask)
 
-closeModal.addEventListener('click', modalClose);
-openModal.addEventListener('click', modalOpen);
-taskForm.addEventListener('submit', createTask);
+openModalBtn.addEventListener("click", openModal)
+
+closeModalBtn.addEventListener("click", closeModal)
+
+
+
+
 

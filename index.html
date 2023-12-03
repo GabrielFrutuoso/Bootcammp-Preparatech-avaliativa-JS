@@ -10,7 +10,7 @@
     <script src="JS/script.js" defer></script>
     <title>ToDo</title>
 </head>
-<body>
+<body onload="showList()">
 
     <div class="modal closed">
         <div class="pop-up">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-control">
                     <label for="taskDesc">Descrição da tarefa</label>
-                    <textarea name="taskDesc" id="taskDesc"></textarea>
+                    <textarea name="taskDesc" id="taskDesc" maxlength="170"></textarea>
                 </div>
 
                 <button type="submit" class="mdi mdi-plus" id="addTask">Adicionar nova tarefa</button>

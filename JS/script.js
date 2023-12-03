@@ -3,10 +3,10 @@ const closeModalBtn = document.querySelector('#closeModalBtn');
 const openModalBtn = document.querySelector('#openModalBtn');
 const form = document.querySelector('form');
 const taskArea = document.querySelector('.taskArea');
+let counter = 0;
+let listTasks = localStorage.getItem('tasks');
 
-let counter = 0
 
-const tarefas = [];
 
 const openModal = () => {
     modal.classList.remove('closed');
@@ -16,15 +16,55 @@ const closeModal = () => {
     modal.classList.add('closed');
 }
 
-const deleteTask = (id) => {
-    const task = document.getElementById(id);
-    task.remove();
+const showList = () => {
+    taskArea.innerHTML = ' ';
+
+
+
+    if (listTasks.length >= 1) {
+        listTasks.map(item => 
+            taskArea.innerHTML += `<li id="${item.id}" class="task ${item.done}">
+            <h3>${item.taskTitle}</h3>
+            <p>${item.taskDesc}
+            </p>
+            <div class="buttons">
+                <button class="mdi mdi-check" id="doneBtn" onclick="setCheck(${item.id})"></button>
+                <button class="mdi mdi-trash-can" id="deleteBtn" onclick="deleteTask(${item.id})"></button>
+            </div>
+        </li>`
+            )
+    }
 }
 
-const setCheck = (id) => {
-    const task = document.getElementById(id);
-    task.classList.add('done');
+const deleteTask = (idTask) => {
+    // listTasks[idTask - 1].done = 'done'
+    const toRemove = listTasks.findIndex(index => index.id === idTask)
+    console.log(toRemove);
+    listTasks.splice(toRemove, 1)
+
+    localStorage.setItem('tasks', JSON.stringify(listTasks))
+    showList();
+
 }
+
+const setCheck = (idTask) => {
+    // listTasks[idTask - 1].done = 'done'
+    const toCheck = listTasks.findIndex(index => index.id === idTask)
+    listTasks[toCheck].done = 'done'
+    
+
+    localStorage.setItem('tasks', JSON.stringify(listTasks))
+    showList();
+
+}
+
+if (listTasks) {
+    listTasks = JSON.parse(listTasks);
+} else {
+    listTasks = [];
+}
+
+
 
 const createNewTask = (e) => {
     e.preventDefault();
@@ -32,21 +72,16 @@ const createNewTask = (e) => {
     if (e.target[0].value === '' || e.target[1].value === '') {
        alert('por favor, preencha os campos corretamente!');
     } else {
-        ++counter
-        const task = `<li id="${counter}" class="task">
-        <h3>${e.target[0].value}</h3>
-        <p>${e.target[1].value}
-        </p>
-        <div class="buttons">
-            <button class="mdi mdi-check" id="doneBtn" onclick="setCheck(${counter})"></button>
-            <button class="mdi mdi-trash-can" id="deleteBtn" onclick="deleteTask(${counter})"></button>
-        </div>
-    </li>`
-    
-        taskArea.innerHTML += task;
+        let newTask = new Object();
+        newTask.id = ++counter;
+        newTask.taskTitle = this.taskTitle.value;
+        newTask.taskDesc = this.taskDesc.value;
+        newTask.done = '';
+        listTasks.push(newTask)
         
-        e.target[0].value = '';
-        e.target[1].value = '';
+
+        localStorage.setItem('tasks', JSON.stringify(listTasks))
+        showList();
         closeModal();
     }
 }

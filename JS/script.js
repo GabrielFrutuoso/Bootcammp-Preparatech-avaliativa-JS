@@ -1,21 +1,28 @@
+// Chamada dos elementos HTML
 const modal = document.querySelector('.modal');
 const closeModalBtn = document.querySelector('#closeModalBtn');
 const openModalBtn = document.querySelector('#openModalBtn');
 const form = document.querySelector('form');
 const taskArea = document.querySelector('.taskArea');
+
+// Chamada da lista de tarefas no localStorage
 let listTasks = localStorage.getItem('tasks');
+
+// Contador
 let counter = 0;
 
-
+// Função para abrir o modal
 const openModal = () => {
     modal.classList.remove('closed');
 }
 
+// Função para fechar o modal
 const closeModal = () => {
     form.reset();
     modal.classList.add('closed');
 }
 
+// Função para mostrar a lista de tarefas
 const showList = () => {
     taskArea.innerHTML = ' ';
     if (listTasks.length >= 1) {
@@ -33,37 +40,34 @@ const showList = () => {
     }
 }
 
+// Função para deletar uma tarefa
 const deleteTask = (idTask) => {
-    // listTasks[idTask - 1].done = 'done'
     const toRemove = listTasks.findIndex(index => index.id === idTask)
     console.log(toRemove);
     listTasks.splice(toRemove, 1);
 
-    // localStorage.setItem('tasks', JSON.stringify(listTasks));
     saveList();
     showList();
 
 }
 
+// Função para marcar uma tarefa como concluída
 const setCheck = (idTask) => {
     const toCheck = listTasks.findIndex(index => index.id === idTask)
     listTasks[toCheck].done = 'done'
 
-
-    // localStorage.setItem('tasks', JSON.stringify(listTasks));
     saveList();
     showList();
-
 }
 
+// Verificação para chamar o array de tarefas no localStorage sem dar erros
 if (listTasks) {
     listTasks = JSON.parse(listTasks);
 } else {
     listTasks = [];
 }
 
-
-
+// Função que cria uma nova tarefa e envia para o localStorage
 const createNewTask = (e) => {
     e.preventDefault();
 
@@ -77,23 +81,21 @@ const createNewTask = (e) => {
         newTask.done = '';
         listTasks.push(newTask);
         
-
-        // localStorage.setItem('tasks', JSON.stringify(listTasks));
         saveList();
         showList();
         closeModal();
     }
 }
 
+// Função para salvar a lista no localStorage
 const saveList = (list) => {
     localStorage.setItem('tasks', JSON.stringify(listTasks));
 
 }
 
+// chamada das funções
 form.addEventListener("submit", createNewTask);
-
 openModalBtn.addEventListener("click", openModal);
-
 closeModalBtn.addEventListener("click", closeModal);
 
 

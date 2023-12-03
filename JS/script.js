@@ -75,7 +75,7 @@ const createNewTask = (e) => {
        alert('por favor, preencha os campos corretamente!');
     } else {
         let newTask = new Object();
-        newTask.id = ++counter;
+        newTask.id = listTasks.length;
         newTask.taskTitle = this.taskTitle.value;
         newTask.taskDesc = this.taskDesc.value;
         newTask.done = '';
